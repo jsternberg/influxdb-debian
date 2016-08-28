@@ -82,3 +82,12 @@ integration/migration_data/
 man/*.xml
 man/*.1
 man/*.1.gz
+
+# debian outputs
+debian/.debhelper/
+debian/debhelper-build-stamp
+debian/files
+debian/influxdb.debhelper.log
+debian/influxdb.substvars
+debian/influxdb/
+obj-*/
