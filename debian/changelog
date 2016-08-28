@@ -1,0 +1,5 @@
+influxdb (1.0.0-1~rc1) unstable; urgency=low
+
+  * Initial release.
+
+ -- Jonathan A. Sternberg <jonathan@influxdb.com>  Sun, 28 Aug 2016 18:53:22 -0500

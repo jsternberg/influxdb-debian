@@ -1,0 +1,4 @@
+influxdb binary: statically-linked-binary usr/bin/*
+influxdb binary: binary-without-manpage usr/bin/influx_inspect
+influxdb binary: binary-without-manpage usr/bin/influx_stress
+influxdb binary: binary-without-manpage usr/bin/influx_tsm

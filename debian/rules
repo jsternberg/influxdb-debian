@@ -1,0 +1,32 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+export DH_OPTIONS
+
+export DH_GOPKG := github.com/influxdata/influxdb
+export DH_GOLANG_EXCLUDES := \
+	github.com/influxdata/influxdb/vendor \
+	github.com/influxdata/influxdb/tests/urlgen \
+	github.com/influxdata/influxdb/services/collectd/test_client \
+	github.com/influxdata/influxdb/stress/stress_test_server
+export DH_GOLANG_INSTALL_ALL := 1
+export PATH := /usr/lib/go-1.6/bin:$(PATH)
+
+%:
+	dh $@ --buildsystem=golang --with=golang
+
+override_dh_auto_clean:
+	dh_auto_clean -O--build-system=golang
+	(cd man && make clean)
+
+override_dh_auto_build:
+	dh_auto_build -O--build-system=golang -- -buildmode=pie -ldflags -extldflags=-Wl,-z,now,-z,relro
+	(cd man && make build)
+
+override_dh_auto_install:
+	dh_auto_install -O--build-system=golang
+	mkdir -p debian/influxdb/usr/share/man/man1
+	install man/*.1 debian/influxdb/usr/share/man/man1/
+	rm -rf debian/influxdb/usr/share/gocode
